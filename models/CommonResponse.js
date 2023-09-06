@@ -5,7 +5,7 @@ module.exports = class CommonResponse {
 		this.error = null;
 	}
 	setHeader(code) {
-		this.header = {
+		this.headers = {
 			code: code,
 		};
 		return this;
