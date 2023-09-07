@@ -14,9 +14,9 @@ async function User_Details_Asset(body) {
 
     // let CheckAssertName = await userAsset
 
-    let assert = await saveassetuserdetails.findOne({ Name: body.Name });
+    let assert = await userAsset.findOne({ Name: body.Name });
 
-    console.log("CheckAssertName", CheckAssertName);
+    console.log("CheckAssertName", assert);
 
     if (assert) {
       return "user already exists";
@@ -32,6 +32,13 @@ async function asser_creation(body) {
   try {
     let saveAssertDetails = new assertCreation(body);
 
+    let assert = await assertCreation.findOne({
+      AssestName: body.AssestName,
+    });
+
+    if (assert) {
+      return "Assert Name already exists";
+    }
     return await saveAssertDetails.save();
   } catch (error) {
     console.log("error", error);
@@ -39,10 +46,14 @@ async function asser_creation(body) {
 }
 
 async function Buy_asserCreation(body) {
+  console.log("body", body);
   try {
     // let deatils = new assertCreation(body);
 
-    let result = await assertCreation.findOne({ userName: body.userName });
+    let result = await assertCreation.findOne({
+      userName: body.userName,
+      AssetName: body.AssetName,
+    });
 
     console.log("resultprint", result);
 
