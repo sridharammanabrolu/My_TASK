@@ -31,7 +31,7 @@ function App() {
                 }
               />
               <Route path="/userDetails" element={<UserDetails  setStoreUserName={setStoreUserName} />} />
-              <Route path="/assets" element={<Assetcreation storeUserName={storeUserName} />} />
+              <Route path="/assets" element={<Assetcreation storeUserName={storeUserName} setPageRouteAccess={setPageRouteAccess} />} />
             </Routes>
           </div>
         </Router>

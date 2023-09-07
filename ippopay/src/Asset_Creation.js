@@ -1,8 +1,10 @@
 import { Button, Card, Grid, Stack, TextField } from "@mui/material";
 import axios from "axios";
 import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
-export default function Assetcreation({ storeUserName }) {
+export default function Assetcreation({ storeUserName, setPageRouteAccess }) {
+  const navigate = useNavigate();
   const [assetName, seTAssetName] = React.useState();
 
   const handleAssetChange = (event) => {
@@ -47,8 +49,12 @@ export default function Assetcreation({ storeUserName }) {
       url: `http://localhost:4000/bookpublisher/assertcreation`,
       data: reqObject,
     });
-    if (response) {
+    if (response.data.data.value === "Assert Name already exists") {
+      alert("Assert Name already exists");
+    } else if (response.data.headers.code === 600) {
       alert("Assert created successfully");
+      navigate("/");
+      setPageRouteAccess(false);
     }
     console.timeLog("response", response);
   };
