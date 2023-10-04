@@ -67,7 +67,10 @@ export default function TimeSheet() {
                   spacing={2}
                 >
                   <Grid item>
-                    <Typography> USERID : {data.user_id}</Typography>
+                    <Typography>
+                       USERID :
+                        {data.user_id}
+                    </Typography>
                   </Grid>
                   <Grid item>
                     <Typography> FIRSTNAME : {data.user_firstname}</Typography>

@@ -27,7 +27,9 @@ export default function Login() {
   const navigate = useNavigate();
 
   function DashboardBannerImage() {
-    const [errorView, setError] = React.useState();
+    const [errorView, setError] = React.useState( );
+        
+    console.log("error", errorView);
     const imageStyle = {
       width: "100%",
       height: "760px",
@@ -59,12 +61,14 @@ export default function Login() {
         );
         navigate("/dashboard");
         window.location.reload();
-      } else {
-        setError(response.data.msg);
-        console.log("errorssssssssssssss", response.data.msg);
+      } else if( response.data.status === false) {
+        alert("Invalid credentials")
+        setError(response?.data?.msg);
+        console.log("errorssssssssssssss", response?.data?.msg);
       }
     };
-    console.log("error", errorView);
+
+
     return (
       <Grid style={{ position: "relative" }} m={4} md={12} lg={12} sm={12}>
         <img

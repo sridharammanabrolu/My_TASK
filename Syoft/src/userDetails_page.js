@@ -99,6 +99,8 @@ export default function UserDetails_page() {
       console.log("response", response);
       if (response.data.status === true) {
         navigate("/login");
+      } else if(response.data.status === false){
+        alert("user details already exists")
       }
     };
     console.log("checked", checked);
