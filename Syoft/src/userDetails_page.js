@@ -122,6 +122,8 @@ export default function UserDetails_page() {
               onClick={() => {
                 onSigninClick();
               }}
+              sx={{ cursor: "pointer" }}
+              color={"blue"}
             >
               Sign in
             </Typography>
