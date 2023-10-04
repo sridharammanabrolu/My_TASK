@@ -143,6 +143,7 @@ export default function UserDetails_page() {
               <Typography my={2}>Password *</Typography>
               <TextField
                 size="small"
+                type="password"
                 helperText={errors.user_password?.message}
                 error={errors.user_password ? true : false}
                 {...register("user_password")}

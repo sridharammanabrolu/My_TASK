@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import React, { useState } from "react";
 
 export default function Login() {
   const userSchema = Yup.object().shape({
@@ -27,7 +27,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   function DashboardBannerImage() {
-    const [errorView, setError] = useState(false);
+    const [errorView, setError] = React.useState();
     const imageStyle = {
       width: "100%",
       height: "760px",
@@ -53,12 +53,15 @@ export default function Login() {
       });
       console.log("response", response);
       if (response.data.status === true) {
-        localStorage.setItem("userData", JSON.stringify(response.data.user_data));
+        localStorage.setItem(
+          "userData",
+          JSON.stringify(response.data.user_data)
+        );
         navigate("/dashboard");
-        window.location.reload()
+        window.location.reload();
       } else {
-        setError(true)
-        console.log("error");
+        setError(response.data.msg);
+        console.log("errorssssssssssssss", response.data.msg);
       }
     };
     console.log("error", errorView);
@@ -70,8 +73,9 @@ export default function Login() {
           alt="Banner with username and password"
         />
         <Grid style={cardStyle}>
+          {/* {errorView === true ? ( */}
           <Typography fontWeight={"bold"} fontSize={"20px"} m={3}>
-            Login Page
+            {errorView ? errorView : "Login Page"}
           </Typography>
           <form onSubmit={handleSubmit(onFormSubmit)}>
             <Stack m={2} sm={12}>
@@ -85,6 +89,7 @@ export default function Login() {
               <Typography my={2}>Password *</Typography>
               <TextField
                 size="small"
+                type="password"
                 helperText={errors.user_password?.message}
                 error={errors.user_password ? true : false}
                 {...register("user_password")}
@@ -99,11 +104,6 @@ export default function Login() {
             </Button>
           </form>
         </Grid>
-        {errorView === true ? (
-            <Typography backgroundColor = "blue">Invalid Credentails</Typography>
-        ) : (
-          ""
-        )}
       </Grid>
     );
   }
